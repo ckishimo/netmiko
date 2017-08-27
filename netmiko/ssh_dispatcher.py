@@ -12,6 +12,7 @@ from netmiko.avaya import AvayaVspSSH
 from netmiko.brocade import BrocadeFastironSSH
 from netmiko.brocade import BrocadeNetironSSH
 from netmiko.brocade import BrocadeNosSSH
+from netmiko.brocade import BrocadeNetironTelnet
 from netmiko.checkpoint import CheckPointGaiaSSH
 from netmiko.ciena import CienaSaosSSH
 from netmiko.cisco import CiscoAsaSSH
