@@ -19,10 +19,11 @@ class BrocadeNetironTelnet(CiscoBaseConnection):
         return output
 
     def telnet_login(self, pri_prompt_terminator='#', alt_prompt_terminator='>',
-                     username_pattern=r"Login:", pwd_pattern=r"assword:",
+                     username_pattern=r"Name: ", pwd_pattern=r"assword: ",
                      delay_factor=1, max_loops=60):
         """Telnet login. Can be username/password or just password."""
-        super(BrocadeNetironConnectTelnet, self).telnet_login(
+        print("telnet login Netiron Telnet")
+        super(BrocadeNetironTelnet, self).telnet_login(
                 pri_prompt_terminator=pri_prompt_terminator,
                 alt_prompt_terminator=alt_prompt_terminator,
                 username_pattern=username_pattern,
