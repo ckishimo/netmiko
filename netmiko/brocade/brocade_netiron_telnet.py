@@ -5,7 +5,7 @@ import time
 from netmiko.cisco_base_connection import CiscoBaseConnection
 from netmiko import log
 
-class BrocadeNetironConnectTelnet(CiscoBaseConnection):
+class BrocadeNetironTelnet(CiscoBaseConnection):
 
     def disable_paging(self, command="skip-page-display", delay_factor=1):
         self.enable()
