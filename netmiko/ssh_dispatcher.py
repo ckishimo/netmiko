@@ -110,6 +110,7 @@ CLASS_MAPPER = new_mapper
 CLASS_MAPPER['cisco_ios_telnet'] = CiscoIosBase
 CLASS_MAPPER['dell_powerconnect_telnet'] = DellPowerConnectTelnet
 CLASS_MAPPER['generic_termserver_telnet'] = TerminalServerTelnet
+CLASS_MAPPER['brocade_netiron_telnet'] = BrocadeNetironTelnet
 
 # Add general terminal_server driver and autodetect
 CLASS_MAPPER['terminal_server'] = TerminalServerSSH
