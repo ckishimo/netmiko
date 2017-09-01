@@ -11,21 +11,27 @@ import re
 
 class BrocadeNetironTelnet(CiscoBaseConnection):
 
+    def check_config_mode(self, check_string='', pattern=''):
+        """Checks if the device is in configuration mode or not."""
+
+        log.debug("ckishimo check config mode in brocade class")
+        self.write_channel('\r')
+        #self.write_channel('\n')
+        output = self.read_until_pattern(pattern=pattern)
+        log.debug("check_config_mode: {0}".format(repr(output)))
+        return check_string in output
+
+    def exit_config_mode(self, exit_config='end\r', pattern=''):
+        """Exit from configuration mode."""
+        if not pattern:
+            pattern = re.escape(self.base_prompt[:16])
+        return super(CiscoBaseConnection, self).exit_config_mode(exit_config=exit_config,
+                                                                 pattern=pattern)
     def session_preparation(self):
         """
         Prepare the session after the connection has been established
-
-        This method handles some differences that occur between various devices
-        early on in the session.
-
-        In general, it should include:
-        self._test_channel_read()
-        self.set_base_prompt()
-        self.disable_paging()
-        self.set_terminal_width()
         """
-        
-        # ckishimo do not test channel - infinte loop reading data
+        # ckishimo FIX test channel
         #self._test_channel_read()
         self.set_base_prompt()
         self.disable_paging()
@@ -35,7 +41,6 @@ class BrocadeNetironTelnet(CiscoBaseConnection):
         """Finds the current network device prompt, last line only."""
         delay_factor = self.select_delay_factor(delay_factor)
         self.clear_buffer()
-        log.debug("ckishimo just changed \n with \r")
         self.write_channel("\r")
         #self.write_channel("\n")
         time.sleep(delay_factor * .1)
@@ -75,7 +80,6 @@ class BrocadeNetironTelnet(CiscoBaseConnection):
 
     def check_enable_mode(self, check_string=''):
         """Check if in enable mode. Return boolean."""
-        log.debug("ckishimo replace \n with \r in brocade_netiron_telnet.py")
         self.write_channel('\r')
         #self.write_channel('\n')
         output = self.read_until_prompt()
@@ -193,3 +197,5 @@ class BrocadeNetironTelnet(CiscoBaseConnection):
                 pwd_pattern=pwd_pattern,
                 delay_factor=delay_factor,
                 max_loops=max_loops)
+
+           
